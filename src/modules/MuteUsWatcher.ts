@@ -24,6 +24,9 @@ export class MuteUsWatcher {
   };
 
   dispose = (): void => {
-    this.target.client.removeAllListeners();
+    this.target.client.removeListener(
+      "voiceStateUpdate",
+      this.voiceStateUpdated
+    );
   };
 }
