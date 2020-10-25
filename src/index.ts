@@ -20,7 +20,6 @@ const commands: Command[] = [new Help(), new Ping(), new MuteUs()];
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  console.log(message.channel.id);
   // Check if the message is in allowed channel
   if (!allowedChannels.includes(message.channel.id)) return;
   // Check if the user has allowed role
