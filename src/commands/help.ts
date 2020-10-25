@@ -5,6 +5,7 @@ import { Command } from "../models/command";
 export class Help implements Command {
   command = "help";
   description = "Shows information about all commands.";
+  format = "help";
   execute = (message: Message, args: string[], allCommands: Command[]) => {
     const reply = new MessageEmbed()
       .setColor(color)
@@ -12,7 +13,10 @@ export class Help implements Command {
       .setDescription("List of all possible bot commands.")
       .setTimestamp();
     allCommands.forEach((cmd) => {
-      reply.addField(prefix + cmd.command, cmd.description);
+      reply.addField(
+        cmd.command,
+        `${cmd.description}\n*Format*: \`${prefix}${cmd.format}\``
+      );
     });
     message.channel.send(reply);
   };
