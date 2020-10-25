@@ -1,14 +1,15 @@
 import { loadConfig, token, prefix, color } from "./config";
-import { Client, MessageEmbed } from "discord.js";
+import { Client } from "discord.js";
 import { Command } from "./models/command";
 import { Ping } from "./commands/ping";
 import { Help } from "./commands/help";
+import { MuteUs } from "./commands/muteus";
 
 loadConfig();
 
 const client = new Client();
 
-const commands: Command[] = [new Help(), new Ping()];
+const commands: Command[] = [new Help(), new Ping(), new MuteUs()];
 
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
