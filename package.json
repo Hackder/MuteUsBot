@@ -1,0 +1,32 @@
+{
+  "name": "mute-us-bot",
+  "version": "1.0.0",
+  "description": "Discord bot that is used to mute whole voice channels at the same time, to make playing games like Among Us easier.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hackder/MuteUsBot.git"
+  },
+  "keywords": [],
+  "author": "https://github.com/Hackder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hackder/MuteUsBot/issues"
+  },
+  "homepage": "https://github.com/Hackder/MuteUsBot#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.2",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "discord.js": "^12.4.1"
+  }
+}
