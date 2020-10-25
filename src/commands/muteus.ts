@@ -1,5 +1,6 @@
+import { info } from "console";
 import { Message } from "discord.js";
-import { color } from "../config";
+import { color, errorMessage, infoMessage, prefix } from "../config";
 import { Command } from "../models/command";
 import { MuteUsWatcher } from "../modules/MuteUsWatcher";
 
@@ -13,19 +14,23 @@ export class MuteUs implements Command {
 
   execute = (message: Message, args: string[]) => {
     if (args.length != 1 || message.mentions.users.keyArray().length != 1) {
-      console.log("Wrong agruments");
+      message.channel.send(
+        errorMessage(`Wrong arguments, for more info check \`${prefix}help\``)
+      );
       return;
     }
 
     const user = message.mentions.users.first();
     if (!user) {
-      console.log("mention error");
+      message.channel.send(errorMessage("Mentioned user does not exist!"));
       return;
     }
 
     const channel = message.guild?.member(user!)?.voice.channel;
     if (!channel) {
-      console.log("User Must be in a voice chanel");
+      message.channel.send(
+        errorMessage("User needs to be connected in a voice channel!")
+      );
       return;
     }
 
@@ -34,12 +39,16 @@ export class MuteUs implements Command {
 
       if (watcher.target.id === user!.id) {
         watcher.dispose();
-        this.activeWatchers.splice(i, 1);
+        const oldWatcher = this.activeWatchers.splice(i, 1)[0];
+
+        message.channel.send(
+          infoMessage(`Stopped watching @${oldWatcher.target.tag}!`)
+        );
         return;
       }
     }
 
-    console.log(channel);
     this.activeWatchers.push(new MuteUsWatcher(channel, user!));
+    message.channel.send(infoMessage(`Started watching @${user.tag}!`));
   };
 }
