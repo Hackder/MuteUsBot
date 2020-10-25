@@ -25,4 +25,8 @@ client.on("message", (message) => {
   });
 });
 
+client.on("ready", () => {
+  console.log("Ready!");
+});
+
 client.login(token);
